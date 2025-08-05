@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Vulnerable Auth System{% endblock %}
+
+{% block content %}
+<style>
+    body {
+        background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 50%, #fbc2eb 100%);
+    }
+    h1 {
+        color: #3a3a8c;
+        text-shadow: 1px 1px 8px #fbc2eb;
+    }
+    .vulnerability-info {
+        background: #fbc2eb;
+        color: #3a3a8c;
+        border: 1px solid #a1c4fd;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+    .account-details {
+        background: #a1c4fd;
+        border: 1px solid #fbc2eb;
+        color: #0c5460;
+        padding: 15px;
+        border-radius: 8px;
+        margin: 20px 0;
+    }
+    .actions-list a {
+        color: #fff;
+        background: linear-gradient(90deg, #a1c4fd 0%, #fbc2eb 100%);
+        padding: 8px 18px;
+        border-radius: 6px;
+        text-decoration: none;
+        margin-right: 10px;
+        font-weight: bold;
+        box-shadow: 0 2px 8px #c2e9fb;
+        transition: background 0.2s;
+    }
+    .actions-list a:hover {
+        background: linear-gradient(90deg, #fbc2eb 0%, #a1c4fd 100%);
+        color: #3a3a8c;
+    }
+</style>
+
+<h1>Welcome, {{ user }}!</h1>
+
+<div class="vulnerability-info">
+    <strong>🔍 SESSION INFO:</strong> Your current session ID is vulnerable to fixation attacks.
+    <br>Session ID: <code>{{ session.get('_id', 'Not available') }}</code>
+</div>
+
+<div class="account-details">
+    <h3>Your Account Details:</h3>
+    <p><strong>Username:</strong> {{ user }}</p>
+    <p><strong>Role:</strong> {{ role }}</p>
+    <p><strong>Session ID:</strong> <code>{{ session.get('_id', 'Not available') }}</code></p>
+</div>
+
+<div style="margin-top: 20px;">
+    <h3>Available Actions:</h3>
+    <ul class="actions-list" style="list-style: none; padding-left: 0;">
+        <li style="display: inline;"><a href="{{ url_for('profile') }}">View Profile</a></li>
+        {% if role == 'admin' %}
+            <li style="display: inline;"><a href="{{ url_for('admin') }}">Access Admin Panel</a></li>
+        {% endif %}
+        <li style="display: inline;"><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+</div>
+{% endblock %}
