@@ -8,6 +8,8 @@ The goal is to help developers understand **how classic authentication works**, 
 
 ---
 
+
+
 ## 🎯 What You'll Learn
 
 - How traditional session-based login works
@@ -29,3 +31,5 @@ SFA-attack-simulation/
 ├── static/               # (optional) CSS or images
 ├── requirements.txt      # Python dependencies
 └── README.md             # Project documentation
+
+
