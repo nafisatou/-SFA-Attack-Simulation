@@ -32,7 +32,7 @@ def login():
         
         # Check if user exists and password is correct
         if username in users and users[username]['password'] == hashlib.sha256(password.encode()).hexdigest():
-            # VULNERABILITY: Session fixation - we don't regenerate session ID after login
+            session.clear()  # Regenerate session to prevent session fixation
             session['user_id'] = username
             session['role'] = users[username]['role']
             flash('Login successful!', 'success')
@@ -69,6 +69,5 @@ def profile():
     return render_template('profile.html', user=session.get('user_id'), role=session.get('role'))
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=5000) 
+    app.run(debug=True, host='0.0.0.0', port=5000)
 
-    
